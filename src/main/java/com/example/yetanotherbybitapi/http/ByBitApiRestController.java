@@ -20,7 +20,20 @@ public class ByBitApiRestController {
     }
     @GetMapping("/last100BtcOrders")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> getLast100BtcOrders() {
-        return ResponseEntity.ok(byBitService.getLast100BtcOrders());
+    public ResponseEntity<?> getLast100BtcOrders(@RequestParam(value = "symbol", required = false)String symbol,
+                                                 @RequestParam(value = "limit", required = false)Integer limit) {
+        return ResponseEntity.ok(byBitService.getLast100BtcOrders(symbol, limit));
+    }
+    @GetMapping("/last100OrdersBySymbol")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> getLast100BtcOrders(@RequestParam(value = "symbol", required = true)String symbol) {
+        byBitService.getLast100OrdersBySymbol(symbol);
+        return ResponseEntity.ok("OK");
+    }
+    @GetMapping("/getAllDataOrders")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> getAllDataOrders(@RequestParam("symbol")String symbol, @RequestParam("limit")Integer limit){
+        byBitService.getAllDataOrders(symbol, limit);
+        return ResponseEntity.ok("OK");
     }
 }

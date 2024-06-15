@@ -27,7 +27,7 @@ public class ByBitResponse {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    static class Result{
+    public static class Result{
         @JsonProperty("list")
         private Order[] list;
     }
