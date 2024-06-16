@@ -7,6 +7,8 @@ import com.example.yetanotherbybitapi.repository.ByBitApiRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -22,6 +24,9 @@ public class ByBitServiceImpl implements ByBitService{
     private final String BASE_URL = "https://api.bybit.com";
     private final RestTemplate restTemplate;
     private final ByBitApiRepository byBitApiRepository;
+
+    @Value("${coin.api.secretkey}")
+    private String apiKey;
     @Override
     public void getLastPrice(String symbol) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(BASE_URL + "/v5/market/tickers")
@@ -91,6 +96,30 @@ public class ByBitServiceImpl implements ByBitService{
         log.info("SELL: " + sellList.size());
     }
 
+
+
+//    @Override
+//    public ResponseEntity<?> showLast100TradesFromCoinApiByExchangeAndSymbol(String symbol, int limit) {
+//        // http://localhost:8081/api/v3/coinapi/trades?symbol=binance_SPOT_PEPE_USDT&limit=100
+//        String coinApiTradesUrl = "https://rest.coinapi.io/v1/trades/" + symbol + "/latest?limit=" + limit;
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.set("X-CoinAPI-Key", apiKey);
+//        HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
+//        ResponseEntity<?> response = restTemplate.exchange(coinApiTradesUrl, HttpMethod.GET, httpEntity, Object.class);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+
+//    @Override
+//    public ResponseEntity<?> getAllSymbolIds() {
+//        String coinApiTradesUrl = "https://rest.coinapi.io/v1/symbols";
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.set("X-CoinAPI-Key", apiKey);
+//        HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
+//        ResponseEntity<?> response = restTemplate.exchange(coinApiTradesUrl, HttpMethod.GET, httpEntity, Object.class);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+
+
     private void launchDataAnalyze(String symbol, Integer limit){
         ByBitResponse byBitResponse = getByBitResponse(symbol, limit);
         Order[] ordersList = byBitResponse.getResult().getList();
@@ -131,4 +160,6 @@ public class ByBitServiceImpl implements ByBitService{
             log.info(String.valueOf(i));
         }
     }
+
+
 }
