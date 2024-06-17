@@ -24,15 +24,19 @@ import java.math.BigDecimal;
 public class Web3JService {
     private final Web3j web3j;
     @SneakyThrows
-    public String createNewEthAddress(String keyWord){
+    public Credentials createNewEthAddress(String keyWord){
         try {
             ECKeyPair ecKeyPair = Keys.createEcKeyPair();
             String walletFileName = WalletUtils.generateWalletFile(keyWord, ecKeyPair, new File("."), false);
             Credentials credentials = WalletUtils.loadCredentials(keyWord, walletFileName);
-
             String address = credentials.getAddress();
-            System.out.println("New address: " + address);
-            return address;
+            log.info("New address: " + address);
+            // Fetch private and public key
+            String privateKey = credentials.getEcKeyPair().getPrivateKey().toString(16);
+            String publicKey = credentials.getAddress();
+            log.info("Private Key: " + privateKey);
+            log.info("Public Key: " + publicKey);
+            return credentials;
         }catch (Exception exception){
             log.error(exception.getMessage());
             throw new RuntimeException();

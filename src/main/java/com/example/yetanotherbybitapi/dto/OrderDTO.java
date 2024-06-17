@@ -1,4 +1,4 @@
-package com.example.yetanotherbybitapi.model;
+package com.example.yetanotherbybitapi.dto;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

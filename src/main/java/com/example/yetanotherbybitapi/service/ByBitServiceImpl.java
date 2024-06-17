@@ -2,13 +2,12 @@ package com.example.yetanotherbybitapi.service;
 
 import com.example.yetanotherbybitapi.model.ByBitResponse;
 import com.example.yetanotherbybitapi.model.Order;
-import com.example.yetanotherbybitapi.model.OrderDTO;
+import com.example.yetanotherbybitapi.dto.OrderDTO;
 import com.example.yetanotherbybitapi.repository.ByBitApiRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;

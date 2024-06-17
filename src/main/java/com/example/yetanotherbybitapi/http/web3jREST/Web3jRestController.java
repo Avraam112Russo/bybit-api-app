@@ -22,7 +22,7 @@ public class Web3jRestController {
     @GetMapping("/new-eth-wallet")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> createNewEthAddress(@RequestParam("keyword")String keyword){
-        String address = web3JService.createNewEthAddress(keyword);
+        String address = web3JService.createNewEthAddress(keyword).getAddress();
         return new ResponseEntity<>("Your ETH address complete: %s".formatted(address), HttpStatus.OK);
     }
     @GetMapping("/latest-block")
