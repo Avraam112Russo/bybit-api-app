@@ -1,4 +1,4 @@
-package com.example.yetanotherbybitapi.http;
+package com.example.yetanotherbybitapi.http.dataAnalyzeREST;
 
 import com.example.yetanotherbybitapi.service.BlockChairService;
 import lombok.RequiredArgsConstructor;

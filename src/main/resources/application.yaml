@@ -19,3 +19,4 @@ spring.datasource:
       password: mysecretpassword
 
 coin.api.secretkey: 0AA5A93A-9924-4A05-99FD-17065DFE5BD3
+infura.api-key: 08cc405b7d454eb49acbaf3c76207da9
